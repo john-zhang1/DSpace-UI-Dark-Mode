@@ -10,7 +10,7 @@ rendering, so there is no flash of a light page before the theme kicks in.
 
 | Light | Dark |
 | --- | --- |
-| <img src="docs/images/dark-mode/home-dark.png" alt="Home page in dark mode" width="100%"> | <img src="docs/images/dark-mode/settings-dark.png" alt="Dark mode setting page in dark mode" width="100%"> |
+| <img src="docs/images/dark-mode/home-light.png" alt="Home page in light mode" width="100%"> | <img src="docs/images/dark-mode/home-dark.png" alt="Home page in dark mode" width="100%"> |
 | <img src="docs/images/dark-mode/search-light.png" alt="Search results in light mode" width="100%"> | <img src="docs/images/dark-mode/search-dark.png" alt="Search results in dark mode" width="100%"> |
 
 Table of Contents
@@ -161,7 +161,7 @@ border color on form controls.
 | `src/app/dark-mode/dark-mode.service.spec.ts` | Unit tests for the resolution order |
 | `src/app/info/dark-mode-settings/` | The settings page (`/info/dark-mode`) with the `ui-switch` toggle |
 | `src/themes/dspace/styles/_dark-mode.scss` | The dark palette and every variable override |
-| `src/themes/dspace/styles/_theme_css_variable_overrides.scss` | Light-mode values |
+| `src/themes/dspace/styles/_theme_css_variable_overrides.scss` | Light-mode values for variables |
 | `src/styles/_global-styles.scss` | Hard-coded light literals replaced with variable references |
 | `src/app/app.component.ts` | Calls `initialize()` at bootstrap (SSR + browser) |
 | `src/app/footer/footer.component.*` | Conditional footer link |

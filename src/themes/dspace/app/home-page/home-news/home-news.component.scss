@@ -3,6 +3,9 @@
 
   div.background-image-container {
     color: white;
+    // this banner paints its own foreground over a dark photo, so headings follow
+    // it rather than the near-black default heading colour (see _global-styles.scss)
+    --ds-heading-color: currentColor;
     position: relative;
     font-weight: 600;
 

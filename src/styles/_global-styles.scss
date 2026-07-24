@@ -560,8 +560,22 @@ ngb-tooltip-window {
   text-decoration: underline;
 }
 
+// Headings sit darker than body copy on the default (light) page surface.
+// This is applied through a cascading custom property rather than a hardcoded
+// colour so that any element painting its own foreground -- a dark hero banner,
+// an image overlay, an inverted footer -- opts every heading inside it back into
+// that foreground with a single `--ds-heading-color: currentColor;`, instead of
+// each component having to out-specify this rule. `color: currentColor` resolves
+// to the inherited colour, so headings simply follow their context.
 h1, h2 {
     color: var(--ds-heading-color, #262626);
+}
+
+// Bootstrap's inverted surfaces set their own foreground; keep headings in step
+// with it automatically so this doesn't have to be repeated per component.
+.text-white,
+[class*="text-bg-"] {
+    --ds-heading-color: currentColor;
 }
 
 a.lead, a.nav-link, .text-dcrimson {
