@@ -3,6 +3,9 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
+// dark mode overrides (must come last so they win over the base/component light colors)
+@import './dark-mode.scss';
+
 .facet-filter, .setting-option, .advanced-search {
   background-color: var(--bs-light);
   border-radius: var(--bs-border-radius);

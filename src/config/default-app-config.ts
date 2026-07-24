@@ -490,6 +490,7 @@ export class DefaultAppConfig implements AppConfig {
     enablePrivacyStatement: true,
     enableCOARNotifySupport: true,
     enableCookieConsentPopup: true,
+    enableDarkMode: true,
   };
 
   // Whether to enable Markdown (https://commonmark.org/) and MathJax (https://www.mathjax.org/)

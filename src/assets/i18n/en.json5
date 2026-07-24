@@ -1965,6 +1965,8 @@
 
   "footer.link.accessibility": "Accessibility settings",
 
+  "footer.link.dark-mode": "Dark mode settings",
+
   "footer.link.dspace": "DSpace software",
 
   "footer.link.lyrasis": "LYRASIS",
@@ -2250,6 +2252,14 @@
   "info.accessibility-settings.submit": "Save accessibility settings",
 
   "info.accessibility-settings.title": "Accessibility settings",
+
+  "info.dark-mode-settings.breadcrumbs": "Dark mode settings",
+
+  "info.dark-mode-settings.title": "Dark mode settings",
+
+  "info.dark-mode-settings.description": "Switch between the light and dark appearance of the site. Your choice is stored in your browser and remembered on your next visit.",
+
+  "info.dark-mode-settings.toggle.label": "Enable dark mode",
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 

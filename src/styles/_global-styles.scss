@@ -529,7 +529,7 @@ ngb-accordion {
 }
 
 .table {
-  --bs-table-accent-bg: #fff;
+  --bs-table-accent-bg: var(--bs-body-bg);
 }
 
 ngb-tooltip-window {
@@ -540,8 +540,8 @@ ngb-tooltip-window {
 }
 
 .table thead th {
-  border-bottom: 2px solid #{$gray-300};
-  border-top: 1px solid #{$gray-300};
+  border-bottom: 2px solid var(--bs-border-color);
+  border-top: 1px solid var(--bs-border-color);
 }
 
 .custom-alignment {
@@ -555,7 +555,23 @@ ngb-tooltip-window {
 
 .link-contrast {
   // Rules for accessibility to meet minimum contrast and have an identifiable link between other texts
-  color: darken($link-color, 5%);
+  color: var(--bs-link-color);
   // We use underline to discern link from text as we can't make color lighter on a white bg
   text-decoration: underline;
+}
+
+h1, h2 {
+    color: var(--ds-heading-color, #262626);
+}
+
+a.lead, a.nav-link, .text-dcrimson {
+    color: var(--ds-brand-link-color, #002D62);
+
+    &:hover {
+        color: var(--ds-brand-link-hover-color, #4E0002);
+      }
+}
+
+.submit-icon {
+    color: var(--ds-heading-color, #262626);
 }

@@ -1,0 +1,166 @@
+// Dark mode
+//
+// Activated by the DarkModeService, which sets `data-bs-theme="dark"` on the <html> element.
+// Bootstrap 5.3 already recolors most of its own components for that attribute. This file only
+// *defines values* for dark mode — it does not target individual elements. The theme's component
+// styles and the base global styles reference semantic CSS variables, so recoloring happens
+// automatically by overriding those variables here.
+//
+// The same declarations are applied in two situations, via the `ds-dark-theme` mixin below:
+//   1. `[data-bs-theme='dark']` — an explicit choice (settings toggle, or the OS-preference default
+//      that DarkModeService writes on the browser).
+//   2. `@media (prefers-color-scheme: dark)` on a root that has no `data-bs-theme` yet — the OS
+//      preference, honoured during SSR / before the service runs, so a dark-OS visitor who hasn't
+//      chosen a theme doesn't get a flash of light. An explicit *light* choice sets
+//      `data-bs-theme="light"`, which excludes it from this block.
+
+@mixin ds-dark-theme {
+  // Dark palette
+  $dm-bg: #15171a; // page background
+  $dm-surface: #1e2125; // cards, header, footer
+  $dm-surface-2: #262a2f; // inputs, hover, raised surfaces
+  $dm-border: #3a3f44; // subtle decorative borders / dividers
+  $dm-input-border: #6c757d; // interactive control boundary — 3:1 on the input fill (WCAG 1.4.11)
+  $dm-text: #e6e8ea;
+  $dm-muted: #adb5bd;
+  $dm-link: #8ab4f8; // light blue with sufficient contrast on dark
+  $dm-link-hover: #aecbfa;
+  $dm-accent: #e06c75; // lightened crimson, legible on dark
+
+  // --- Bootstrap core variables ---
+  // Most are already set by Bootstrap's own [data-bs-theme=dark] block, but DSpace re-declares
+  // several of them at :root (see styles/bootstrap_variables_mapping.scss), so we restate them here.
+  --bs-body-bg: #{$dm-bg};
+  --bs-body-bg-rgb: 21, 23, 26;
+  --bs-body-color: #{$dm-text};
+  --bs-body-color-rgb: 230, 232, 234;
+  --bs-secondary-color: #{$dm-muted};
+  --bs-secondary-bg: #{$dm-surface};
+  --bs-tertiary-bg: #{$dm-surface-2};
+  --bs-emphasis-color: #fff;
+  --bs-border-color: #{$dm-border};
+
+  --bs-light: #{$dm-surface-2};
+  --bs-light-rgb: 38, 42, 47;
+
+  --bs-link-color: #{$dm-link};
+  --bs-link-color-rgb: 138, 180, 248;
+  --bs-link-hover-color: #{$dm-link-hover};
+  --bs-link-hover-color-rgb: 174, 203, 250;
+
+  // Form controls (re-mapped by DSpace at :root)
+  --bs-input-bg: #{$dm-surface-2};
+  --bs-input-color: #{$dm-text};
+  --bs-input-border-color: #{$dm-input-border};
+
+  // Tables (re-mapped by DSpace at :root)
+  --bs-table-bg: #{$dm-surface};
+  --bs-table-color: #{$dm-text};
+  --bs-table-accent-bg: #{$dm-surface-2};
+  --bs-table-border-color: #{$dm-border};
+
+  // Cards / dropdowns
+  --bs-card-border-color: #{$dm-border};
+  --bs-dropdown-link-hover-bg: #{$dm-surface-2};
+  --bs-dropdown-link-hover-color: #{$dm-text};
+
+  // --- DSpace custom variables ---
+  --ds-header-bg: #{$dm-surface};
+  --ds-top-footer-bg: #{$dm-surface-2};
+  --ds-footer-bg: #{$dm-surface};
+  --ds-banner-text-background: rgba(0, 0, 0, 0.65);
+
+  // Role colors (light values live in _theme_css_variable_overrides.scss)
+  --ds-heading-color: #{$dm-text};
+  --ds-strong-border-color: #{$dm-border};
+  --ds-brand-accent-color: #{$dm-accent};
+  --ds-brand-link-color: #{$dm-link};
+  --ds-brand-link-hover-color: #{$dm-link-hover};
+  --ds-link-accent-color: #{$dm-link};
+  --ds-chart-bar-color: #{$dm-muted};
+
+  // Breadcrumb link colors (their light values are baked into SASS vars, so override here)
+  --ds-breadcrumb-link-color: #{$dm-link};
+  --ds-breadcrumb-link-active-color: #{$dm-text};
+
+  // Navbar / header. These default to the (dark) $link-color / $body-color, which is invisible
+  // on the now-dark navbar, so override them to light values here.
+  --ds-navbar-link-color: #{$dm-text};
+  --ds-navbar-link-color-hover: #{$dm-link};
+  --ds-header-icon-color: #{$dm-text};
+  --ds-header-icon-color-hover: #{$dm-link};
+
+  // Mobile expandable navbar (defaults to a #fff background with dark links)
+  --ds-expandable-navbar-bg: #{$dm-surface};
+  --ds-expandable-navbar-link-color: #{$dm-text};
+  --ds-expandable-navbar-link-color-hover: #{$dm-link};
+  --ds-expandable-navbar-link-background-hover: #{$dm-surface-2};
+
+  // Desktop navbar + submenu backgrounds (default to #fff)
+  --ds-navbar-bg: #{$dm-surface};
+  --ds-navbar-dropdown-bg: #{$dm-surface};
+
+  // User (auth) menu dropdown — dark link text on a light hover by default
+  --ds-user-menu-dropdown-link-color: #{$dm-text};
+  --ds-user-menu-dropdown-link-background-hover: #{$dm-surface-2};
+
+  // Breadcrumb bar background (defaults to a light gray, which hides the light link text)
+  --ds-breadcrumb-bg: #{$dm-surface-2};
+
+  // Home news section background (base component; light gray by default)
+  --ds-home-news-background-color: #{$dm-surface};
+
+  // Thumbnail placeholder box (light card with dark text by default)
+  --ds-thumbnail-placeholder-background: #{$dm-surface-2};
+  --ds-thumbnail-placeholder-border: 1px solid #{$dm-border};
+  --ds-thumbnail-placeholder-color: #{$dm-muted};
+
+  // DSO selector modal — currently-selected row highlight (light by default)
+  --ds-dso-selector-current-background-color: #{$dm-surface-2};
+  --ds-dso-selector-current-background-hover-color: #{$dm-border};
+
+  // Range-filter slider handle (dark blue, hard to see on a dark track/page)
+  --ds-slider-handle-color: #{$dm-link};
+
+  // Metadata-edit status row backgrounds (lighten(...,30%) light tints by default).
+  // Use low-alpha semantic tints so they read as subtle bands over the dark surface.
+  --ds-primary-bg: rgba(var(--bs-primary-rgb), 0.25);
+  --ds-secondary-bg: rgba(var(--bs-secondary-rgb), 0.25);
+  --ds-success-bg: rgba(var(--bs-success-rgb), 0.22);
+  --ds-info-bg: rgba(var(--bs-info-rgb), 0.25);
+  --ds-warning-bg: rgba(var(--bs-warning-rgb), 0.25);
+  --ds-danger-bg: rgba(var(--bs-danger-rgb), 0.25);
+
+  // The base table mapping sets --bs-table-striped-bg on the .table element itself (with a light
+  // value), so an ancestor-level override won't reach it — restate it at the element level.
+  .table {
+    --bs-table-striped-bg: #{$dm-surface-2};
+  }
+
+  // Surfaces tinted with the (now dark) --bs-light variable read fine, but the search /
+  // advanced-search panels also need a visible border to separate them from the page.
+  .facet-filter, .setting-option, .advanced-search {
+    border: 1px solid var(--bs-border-color);
+  }
+
+  // Form-control boundaries must be perceivable to identify the control (WCAG 1.4.11, 3:1).
+  // Bootstrap draws them with var(--bs-border-color), which is kept subtle for decorative
+  // dividers, so raise the contrast for interactive controls specifically.
+  .form-control, .form-select, .form-check-input, .input-group-text {
+    border-color: #{$dm-input-border};
+  }
+}
+
+// 1. Explicit dark: the settings toggle, or the OS-preference default written by DarkModeService.
+[data-bs-theme='dark'] {
+  @include ds-dark-theme;
+}
+
+// 2. OS preference, honoured during SSR / before the service runs, while no explicit choice
+//    (no data-bs-theme attribute) has been made. An explicit light choice sets
+//    data-bs-theme="light", excluding it here.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) {
+    @include ds-dark-theme;
+  }
+}

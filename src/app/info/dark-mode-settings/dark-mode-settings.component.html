@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>{{ 'info.dark-mode-settings.title' | translate }}</h2>
+
+  <p>{{ 'info.dark-mode-settings.description' | translate }}</p>
+
+  <form>
+    <div class="mb-3 row">
+      <label [for]="'darkModeInput'" class="col-sm-4 col-form-label">
+        {{ 'info.dark-mode-settings.toggle.label' | translate }}
+      </label>
+
+      <div class="col-sm-4">
+        <ui-switch [id]="'darkModeInput'"
+                   [checked]="enabled$ | async"
+                   (change)="setEnabled($event)"
+                   [attr.aria-label]="'info.dark-mode-settings.toggle.label' | translate"
+        ></ui-switch>
+      </div>
+    </div>
+  </form>
+</div>

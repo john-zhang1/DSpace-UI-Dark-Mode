@@ -484,6 +484,9 @@ info:
   enableCOARNotifySupport: true
   # Whether to show the cookie consent popup and the cookie settings footer link or not.
   enableCookieConsentPopup: true
+  # Whether dark mode is available. When false, the "Dark mode settings" footer link is hidden
+  # and the settings page is disabled.
+  enableDarkMode: true
 
 # Whether to enable Markdown (https://commonmark.org/) and MathJax (https://www.mathjax.org/)
 # display in supported metadata fields. By default, only dc.description.abstract is supported.

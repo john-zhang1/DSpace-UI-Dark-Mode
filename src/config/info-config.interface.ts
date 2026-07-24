@@ -5,4 +5,5 @@ export interface InfoConfig extends Config {
   enablePrivacyStatement?: boolean;
   enableCOARNotifySupport?: boolean;
   enableCookieConsentPopup?: boolean;
+  enableDarkMode?: boolean;
 }

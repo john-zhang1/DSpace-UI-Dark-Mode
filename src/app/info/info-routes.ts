@@ -9,11 +9,13 @@ import { notifyInfoGuard } from '../core/coar-notify/notify-info/notify-info.gua
 import { feedbackGuard } from '../core/feedback/feedback.guard';
 import { hasValue } from '../shared/empty.util';
 import { AccessibilitySettingsComponent } from './accessibility-settings/accessibility-settings.component';
+import { DarkModeSettingsComponent } from './dark-mode-settings/dark-mode-settings.component';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import {
   ACCESSIBILITY_SETTINGS_PATH,
   COAR_NOTIFY_SUPPORT,
+  DARK_MODE_SETTINGS_PATH,
   END_USER_AGREEMENT_PATH,
   FEEDBACK_PATH,
   PRIVACY_PATH,
@@ -36,6 +38,12 @@ export const ROUTES: Routes = [
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     data: { title: 'info.accessibility-settings.title', breadcrumbKey: 'info.accessibility-settings' },
   },
+  environment.info.enableDarkMode ? {
+    path: DARK_MODE_SETTINGS_PATH,
+    component: DarkModeSettingsComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: 'info.dark-mode-settings.title', breadcrumbKey: 'info.dark-mode-settings' },
+  } : undefined,
   environment.info.enableEndUserAgreement ? {
     path: END_USER_AGREEMENT_PATH,
     component: ThemedEndUserAgreementComponent,

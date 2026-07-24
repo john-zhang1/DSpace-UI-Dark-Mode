@@ -46,6 +46,7 @@ export class FooterComponent implements OnInit {
   showCookieSettings = false;
   showPrivacyPolicy: boolean;
   showEndUserAgreement: boolean;
+  showDarkModeSettings: boolean;
   showSendFeedback$: Observable<boolean>;
   coarLdnEnabled$: Observable<boolean>;
 
@@ -61,6 +62,7 @@ export class FooterComponent implements OnInit {
     this.showCookieSettings = this.appConfig.info.enableCookieConsentPopup;
     this.showPrivacyPolicy = this.appConfig.info.enablePrivacyStatement;
     this.showEndUserAgreement = this.appConfig.info.enableEndUserAgreement;
+    this.showDarkModeSettings = this.appConfig.info.enableDarkMode;
     this.coarLdnEnabled$ = this.appConfig.info.enableCOARNotifySupport ? this.notifyInfoService.isCoarConfigEnabled() : of(false);
     this.showSendFeedback$ = this.authorizationService.isAuthorized(FeatureID.CanSendFeedback);
   }

@@ -46,6 +46,7 @@ import {
   NativeWindowService,
 } from './core/services/window.service';
 import { distinctNext } from './core/shared/distinct-next';
+import { DarkModeService } from './dark-mode/dark-mode.service';
 import { ThemedRootComponent } from './root/themed-root.component';
 import { HostWindowResizeAction } from './shared/host-window.actions';
 import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
@@ -92,6 +93,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: any,
     @Inject(PLATFORM_ID) private platformId: any,
     private themeService: ThemeService,
+    private darkModeService: DarkModeService,
     private translate: TranslateService,
     private store: Store<HostWindowState>,
     private authService: AuthService,
@@ -107,6 +109,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     this.isThemeLoading$ = this.themeService.isThemeLoading$;
+
+    // Apply the persisted dark mode preference as early as possible (also during SSR)
+    // to avoid a flash of the light theme on load.
+    this.darkModeService.initialize();
 
     this.storeCSSVariables();
   }

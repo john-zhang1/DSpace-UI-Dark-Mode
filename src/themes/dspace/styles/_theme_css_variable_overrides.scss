@@ -25,5 +25,16 @@
 
   --ds-item-page-img-field-default-inline-height: 24px;
   --ds-item-page-img-field-ror-inline-height: var(--ds-item-page-img-field-default-inline-height);
+
+  /* Role colors.
+     These hold the current light-mode values so light mode is unchanged; their dark-mode
+     counterparts live in styles/_dark-mode.scss under [data-bs-theme='dark']. */
+  --ds-heading-color: #262626;             // near-black headings & icon ink
+  --ds-strong-border-color: #262626;       // strong near-black delineator borders
+  --ds-brand-accent-color: #841617;        // Crimson accent (icons, navbar underline)
+  --ds-brand-link-color: #002D62;          // Navy link/label text
+  --ds-brand-link-hover-color: #4E0002;    // crimson link hover
+  --ds-link-accent-color: #2566b3;         // blue accent link (impact chart)
+  --ds-chart-bar-color: #1c1c1c;           // data-viz bar fill
 }
 
