@@ -27,6 +27,32 @@
   $dm-link-hover: #aecbfa;
   $dm-accent: #e06c75; // lightened crimson, legible on dark
 
+  // Semantic role colors, re-derived for a dark background.
+  //
+  // The theme's semantic colors were picked as *ink on white* ($primary/$dark #43515f,
+  // $secondary #495057, $info #1e6f90, $danger #cf4444), and Bootstrap's own dark theme
+  // deliberately leaves them untouched. Used as text or as a control boundary on this
+  // page background they measure 2.20-3.90:1 — under the 4.5:1 floor for text (WCAG 1.4.3)
+  // and, for the solid fills, under the 3:1 floor for control boundaries (WCAG 1.4.11).
+  //
+  // Two different jobs need two different values, so each role gets both:
+  //   *-ink  — used as TEXT or BORDER: outline buttons, .text-* utilities. Light.
+  //   *-fill — used as a FILL behind a white label: solid buttons. Mid-tone, kept inside
+  //            the window where it clears 3:1 against the page *and* still carries white
+  //            text at 4.5:1. (Ratios in the comments are against $dm-bg unless noted.)
+  $dm-primary-ink: #9db3c9; // 8.3:1 on $dm-bg, 6.7:1 on $dm-surface-2
+  $dm-secondary-ink: #adb5bd; // 8.7:1 / 7.0:1
+  $dm-dark-ink: $dm-text; // `.text-dark` means "near-black ink"; on dark it inverts
+  $dm-info-ink: #5fb3d4; // 7.6:1 / 6.1:1
+  $dm-danger-ink: #ea868f; // 7.1:1 / 5.7:1
+
+  $dm-primary-fill: #636f7a; // 3.5:1 vs page, white label 5.1:1
+  $dm-primary-fill-hover: #6c7782; // 3.9:1 / 4.6:1
+  $dm-primary-fill-active: #5a6672; // 3.1:1 / 5.9:1
+  $dm-secondary-fill: #686e74; // 3.5:1 / 5.2:1
+  $dm-secondary-fill-hover: #71777c; // 4.0:1 / 4.5:1
+  $dm-secondary-fill-active: #5f656b; // 3.0:1 / 5.9:1
+
   // --- Bootstrap core variables ---
   // Most are already set by Bootstrap's own [data-bs-theme=dark] block, but DSpace re-declares
   // several of them at :root (see styles/bootstrap_variables_mapping.scss), so we restate them here.
@@ -148,6 +174,156 @@
   // dividers, so raise the contrast for interactive controls specifically.
   .form-control, .form-select, .form-check-input, .input-group-text {
     border-color: #{$dm-input-border};
+  }
+
+  // --- Role-colored buttons and text utilities ---------------------------------------
+  // These are the one place where overriding --bs-primary and friends is not enough:
+  // button-variant()/button-outline-variant() bake the *literal* hex into per-variant
+  // --bs-btn-* declarations at compile time, and the .text-* utilities are !important.
+  // So the values have to be restated on the variant classes themselves. Still values,
+  // not layout — no component is being targeted.
+  //
+  // --bs-primary / --bs-secondary / --bs-dark are intentionally left at their light
+  // values: they only drive the .bg-* utilities, which in this app are almost entirely
+  // badges, and a white badge label already reads at 8:1 on those fills.
+
+  // Outline buttons: the role color is the ink and the border, so it must be the light
+  // variant. On hover/active the button fills with that same light color (Bootstrap's own
+  // outline behaviour), which flips the label to the page's dark ink.
+  .btn-outline-primary {
+    --bs-btn-color: #{$dm-primary-ink};
+    --bs-btn-border-color: #{$dm-primary-ink};
+    --bs-btn-hover-color: #{$dm-bg};
+    --bs-btn-hover-bg: #{$dm-primary-ink};
+    --bs-btn-hover-border-color: #{$dm-primary-ink};
+    --bs-btn-focus-shadow-rgb: 157, 179, 201;
+    --bs-btn-active-color: #{$dm-bg};
+    --bs-btn-active-bg: #{$dm-primary-ink};
+    --bs-btn-active-border-color: #{$dm-primary-ink};
+    --bs-btn-disabled-color: #{$dm-primary-ink};
+    --bs-btn-disabled-border-color: #{$dm-primary-ink};
+  }
+
+  .btn-outline-secondary {
+    --bs-btn-color: #{$dm-secondary-ink};
+    --bs-btn-border-color: #{$dm-secondary-ink};
+    --bs-btn-hover-color: #{$dm-bg};
+    --bs-btn-hover-bg: #{$dm-secondary-ink};
+    --bs-btn-hover-border-color: #{$dm-secondary-ink};
+    --bs-btn-focus-shadow-rgb: 173, 181, 189;
+    --bs-btn-active-color: #{$dm-bg};
+    --bs-btn-active-bg: #{$dm-secondary-ink};
+    --bs-btn-active-border-color: #{$dm-secondary-ink};
+    --bs-btn-disabled-color: #{$dm-secondary-ink};
+    --bs-btn-disabled-border-color: #{$dm-secondary-ink};
+  }
+
+  .btn-outline-dark {
+    --bs-btn-color: #{$dm-dark-ink};
+    --bs-btn-border-color: #{$dm-dark-ink};
+    --bs-btn-hover-color: #{$dm-bg};
+    --bs-btn-hover-bg: #{$dm-dark-ink};
+    --bs-btn-hover-border-color: #{$dm-dark-ink};
+    --bs-btn-focus-shadow-rgb: 230, 232, 234;
+    --bs-btn-active-color: #{$dm-bg};
+    --bs-btn-active-bg: #{$dm-dark-ink};
+    --bs-btn-active-border-color: #{$dm-dark-ink};
+    --bs-btn-disabled-color: #{$dm-dark-ink};
+    --bs-btn-disabled-border-color: #{$dm-dark-ink};
+  }
+
+  .btn-outline-info {
+    --bs-btn-color: #{$dm-info-ink};
+    --bs-btn-border-color: #{$dm-info-ink};
+    --bs-btn-hover-color: #{$dm-bg};
+    --bs-btn-hover-bg: #{$dm-info-ink};
+    --bs-btn-hover-border-color: #{$dm-info-ink};
+    --bs-btn-focus-shadow-rgb: 95, 179, 212;
+    --bs-btn-active-color: #{$dm-bg};
+    --bs-btn-active-bg: #{$dm-info-ink};
+    --bs-btn-active-border-color: #{$dm-info-ink};
+    --bs-btn-disabled-color: #{$dm-info-ink};
+    --bs-btn-disabled-border-color: #{$dm-info-ink};
+  }
+
+  .btn-outline-danger {
+    --bs-btn-color: #{$dm-danger-ink};
+    --bs-btn-border-color: #{$dm-danger-ink};
+    --bs-btn-hover-color: #{$dm-bg};
+    --bs-btn-hover-bg: #{$dm-danger-ink};
+    --bs-btn-hover-border-color: #{$dm-danger-ink};
+    --bs-btn-focus-shadow-rgb: 234, 134, 143;
+    --bs-btn-active-color: #{$dm-bg};
+    --bs-btn-active-bg: #{$dm-danger-ink};
+    --bs-btn-active-border-color: #{$dm-danger-ink};
+    --bs-btn-disabled-color: #{$dm-danger-ink};
+    --bs-btn-disabled-border-color: #{$dm-danger-ink};
+  }
+
+  // Solid buttons: the label is white and already legible, but the fill *is* the control's
+  // boundary and at its light value it only reaches 2.2:1 against the page (WCAG 1.4.11).
+  // Lift the fill into the band that clears 3:1 while keeping the white label above 4.5:1.
+  // .btn-info / .btn-danger / .btn-success / .btn-warning already clear both and are left alone.
+  .btn-primary, .btn-dark {
+    --bs-btn-bg: #{$dm-primary-fill};
+    --bs-btn-border-color: #{$dm-primary-fill};
+    --bs-btn-hover-bg: #{$dm-primary-fill-hover};
+    --bs-btn-hover-border-color: #{$dm-primary-fill-hover};
+    --bs-btn-active-bg: #{$dm-primary-fill-active};
+    --bs-btn-active-border-color: #{$dm-primary-fill-active};
+    --bs-btn-disabled-bg: #{$dm-primary-fill};
+    --bs-btn-disabled-border-color: #{$dm-primary-fill};
+  }
+
+  .btn-secondary {
+    --bs-btn-bg: #{$dm-secondary-fill};
+    --bs-btn-border-color: #{$dm-secondary-fill};
+    --bs-btn-hover-bg: #{$dm-secondary-fill-hover};
+    --bs-btn-hover-border-color: #{$dm-secondary-fill-hover};
+    --bs-btn-active-bg: #{$dm-secondary-fill-active};
+    --bs-btn-active-border-color: #{$dm-secondary-fill-active};
+    --bs-btn-disabled-bg: #{$dm-secondary-fill};
+    --bs-btn-disabled-border-color: #{$dm-secondary-fill};
+  }
+
+  // Text utilities. Bootstrap declares these !important off --bs-<role>-rgb, which we keep
+  // at the light value for the .bg-* badges, so restate the color here. Every use of these
+  // in the app is ink on a dark surface (the two that sit on .bg-light are fine, since
+  // --bs-light is itself dark here).
+  .text-primary {
+    color: rgba(157, 179, 201, var(--bs-text-opacity)) !important;
+  }
+
+  .text-secondary {
+    color: rgba(173, 181, 189, var(--bs-text-opacity)) !important;
+  }
+
+  .text-dark {
+    color: rgba(230, 232, 234, var(--bs-text-opacity)) !important;
+  }
+
+  .text-info {
+    color: rgba(95, 179, 212, var(--bs-text-opacity)) !important;
+  }
+
+  .text-danger {
+    color: rgba(234, 134, 143, var(--bs-text-opacity)) !important;
+  }
+
+  // Pagination. $pagination-disabled-bg is a hard-coded $white upstream, so disabled page
+  // links render as a white block on the dark page; the link borders also inherit the
+  // subtle decorative --bs-border-color, leaving these controls without a 3:1 boundary.
+  // The disabled state carries the "…" ellipsis, which is a separator rather than a real
+  // disabled control, so give it readable text (4.9:1) and let the muted border and the
+  // absent hover carry the "inactive" signal instead.
+  .pagination {
+    --bs-pagination-border-color: #{$dm-input-border};
+    --bs-pagination-hover-border-color: #{$dm-input-border};
+    --bs-pagination-disabled-bg: #{$dm-surface};
+    --bs-pagination-disabled-color: #868e96;
+    --bs-pagination-disabled-border-color: #{$dm-border};
+    --bs-pagination-active-bg: #{$dm-primary-fill};
+    --bs-pagination-active-border-color: #{$dm-primary-fill};
   }
 }
 
